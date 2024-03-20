@@ -145,7 +145,7 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
                       const SizedBox(
                         width: 5,
                       ),
-                      popularImageCard('assets/images/popular4.jpeg')
+                      popularImageCard('assets/images/popular1.png')
                     ],
                   ),
                 )

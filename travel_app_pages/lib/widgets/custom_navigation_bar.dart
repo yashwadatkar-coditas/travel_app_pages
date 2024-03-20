@@ -22,7 +22,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage('assets/images/Groupicon2.png')),
+          icon: ImageIcon(AssetImage('assets/images/second_navbar_icon.png')),
           label: '',
         ),
         BottomNavigationBarItem(
