@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:travel_app_pages/screens/home_page.dart';
 import 'package:travel_app_pages/screens/profile_screen.dart';
 import 'package:travel_app_pages/screens/social_media_page.dart';
+import 'package:travel_app_pages/widgets/custom_navigation_bar.dart';
 import 'package:travel_app_pages/widgets/place_detail_page_card.dart';
 
 class PlaceDetail extends StatefulWidget {
@@ -30,56 +32,53 @@ class _PlaceDetailState extends State<PlaceDetail> {
             ),
             Positioned(
               top: 75,
-              left: 40,
-              child: SizedBox(
-                height: 50,
-                width: 50,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.arrow_back_ios,
-                        size: 15,
-                        color: Colors.white,
+              left: 30,
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            size: 15,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    shape: ContinuousRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(35))),
-                    side: BorderSide(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 75,
-              right: 40,
-              child: SizedBox(
-                height: 50,
-                width: 50,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
+                      style: OutlinedButton.styleFrom(
+                        shape: ContinuousRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(35))),
+                        side: BorderSide(color: Colors.white),
+                      ),
                     ),
-                    side: BorderSide(color: Colors.white),
                   ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('assets/images/Groupbookmark1.png'),
+                  SizedBox(width: 270),
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        shape: ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        side: BorderSide(color: Colors.white),
+                      ),
+                      child: Image(
+                        image: AssetImage('assets/images/Groupbookmark.png'),
                         height: 30,
                         width: 30,
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             Positioned(
@@ -98,7 +97,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 27,
                       ),
                       const Text(
@@ -119,13 +118,15 @@ class _PlaceDetailState extends State<PlaceDetail> {
                       const SizedBox(
                         width: 328,
                         height: 145,
-                        child: Text(
-                          "Just say anything, George, say what ever's natural, the first thing that comes to your mind. Take that you mutated son-of-a-bitch My pine, why you. You space bastard, you killed a pine. You do? Yeah, it's 8:00. Hey, McFly, I thought I told you never ",
-                          style: TextStyle(
-                              fontFamily: 'Gellix',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF19202D)),
+                        child: SingleChildScrollView(
+                          child: Text(
+                            "Just say anything, George, say what ever's natural, the first thing that comes to your mind. Take that you mutated son-of-a-bitch My pine, why you. You space bastard, you killed a pine. You do? Yeah, it's 8:00. Hey, McFly, I thought I told you never ",
+                            style: TextStyle(
+                                fontFamily: 'Gellix',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF19202D)),
+                          ),
                         ),
                       )
                     ],
@@ -133,37 +134,18 @@ class _PlaceDetailState extends State<PlaceDetail> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Vectorhome.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(
-                  'assets/images/Groupicon2.png',
-                )),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupbell.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupperson.png')),
-                label: '',
-              ),
-            ],
-            onTap: (index) {
+        bottomNavigationBar: CustomBottomNavigationBar(
+          currentIndex: _currentIndex,
+          screens: _screens,
+          onTap: (index) {
+            if (index != _currentIndex) {
               setState(() {
                 _currentIndex = index;
               });
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => _screens[index]));
-            },
-            selectedItemColor: const Color(0xFF5474FD),
-            unselectedItemColor: const Color(0xFF9397A0)));
+            }
+          },
+        ));
   }
 }

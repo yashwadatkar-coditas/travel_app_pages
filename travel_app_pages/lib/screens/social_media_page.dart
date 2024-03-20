@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:travel_app_pages/screens/home_page.dart';
 import 'package:travel_app_pages/screens/place_detail_page.dart';
 import 'package:travel_app_pages/screens/profile_screen.dart';
+import 'package:travel_app_pages/widgets/custom_navigation_bar.dart';
 import 'package:travel_app_pages/widgets/popular_images_card.dart';
 
 import 'package:travel_app_pages/widgets/social_media_followers_card.dart';
@@ -152,37 +153,18 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Vectorhome.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(
-                  'assets/images/Groupicon2.png',
-                )),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupbell.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupperson.png')),
-                label: '',
-              ),
-            ],
-            onTap: (index) {
+        bottomNavigationBar: CustomBottomNavigationBar(
+          currentIndex: _currentIndex,
+          screens: _screens,
+          onTap: (index) {
+            if (index != _currentIndex) {
               setState(() {
                 _currentIndex = index;
               });
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => _screens[index]));
-            },
-            selectedItemColor: const Color(0xFF5474FD),
-            unselectedItemColor: const Color(0xFF9397A0)));
+            }
+          },
+        ));
   }
 }

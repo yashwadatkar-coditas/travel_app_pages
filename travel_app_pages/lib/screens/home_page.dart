@@ -6,6 +6,7 @@ import 'package:travel_app_pages/screens/place_detail_page.dart';
 import 'package:travel_app_pages/screens/profile_screen.dart';
 import 'package:travel_app_pages/screens/social_media_page.dart';
 import 'package:travel_app_pages/widgets/custom_card_list.dart';
+import 'package:travel_app_pages/widgets/custom_navigation_bar.dart';
 import 'package:travel_app_pages/widgets/custom_videocard_list.dart';
 import 'package:travel_app_pages/widgets/profile_bar.dart';
 import 'package:travel_app_pages/widgets/searchbar.dart';
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const ProfileScreen()
   ];
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,37 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Vectorhome.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage(
-                  'assets/images/Groupicon2.png',
-                )),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupbell.png')),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/images/Groupperson.png')),
-                label: '',
-              ),
-            ],
-            onTap: (index) {
+        bottomNavigationBar: CustomBottomNavigationBar(
+          currentIndex: _currentIndex,
+          screens: _screens,
+          onTap: (index) {
+            if (index != _currentIndex) {
               setState(() {
                 _currentIndex = index;
               });
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => _screens[index]));
-            },
-            selectedItemColor: const Color(0xFF5474FD),
-            unselectedItemColor: const Color(0xFF9397A0)));
+            }
+          },
+        ));
   }
 }
